@@ -1,7 +1,7 @@
 package com.rabbiter.bms.service.impl;
 
-import com.rabbiter.bms.mapper.BorrowMapper;
-import com.rabbiter.bms.mapper.UserMapper;
+import com.rabbiter.bms.repository.BorrowRepository;
+import com.rabbiter.bms.repository.UserRepository;
 import com.rabbiter.bms.model.User;
 import com.rabbiter.bms.service.UserService;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -21,13 +21,13 @@ import java.util.concurrent.TimeUnit;
 public class UserServiceImpl implements UserService {
 
     @Resource
-    private UserMapper userMapper;
+    private UserRepository userRepository;
 
     @Resource
     private RedisTemplate<Object, Object> redisTemplate;
 
     @Resource
-    private BorrowMapper borrowMapper;
+    private BorrowRepository borrowRepository;
 
     /**
      * 登录
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User login(User user) {
-        return userMapper.selectByUsernameAndPasswordAndIsAdmin(user.getUsername(), user.getUserpassword(), user.getIsadmin());
+        return userRepository.selectByUsernameAndPasswordAndIsAdmin(user.getUsername(), user.getUserpassword(), user.getIsadmin());
     }
 
     /**
@@ -86,14 +86,14 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Integer register(String username, String password) {
-        User tmp = userMapper.selectByUsername(username);
+        User tmp = userRepository.selectByUsername(username);
         if(tmp != null) return 0;  //账号重复
 
         User user = new User();
         user.setUsername(username);
         user.setUserpassword(password);
         user.setIsadmin((byte)0);
-        return userMapper.insertSelective(user);
+        return userRepository.insertSelective(user);
     }
 
     /**
@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUserid(id);
         user.setUserpassword(password);
-        userMapper.updateByPrimaryKeySelective(user);
+        userRepository.updateByPrimaryKeySelective(user);
     }
 
     /**
@@ -117,7 +117,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Integer getCount() {
-        return userMapper.selectCount();
+        return userRepository.selectCount();
     }
 
     /**
@@ -127,7 +127,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<User> queryUsers() {
-        return userMapper.selectAll();
+        return userRepository.selectAll();
     }
 
     /**
@@ -138,7 +138,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int getSearchCount(Map<String, Object> params) {
-        return userMapper.selectCountBySearch(params);
+        return userRepository.selectCountBySearch(params);
     }
 
     /**
@@ -149,7 +149,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<User> searchUsersByPage(Map<String, Object> params) {
-        return userMapper.selectBySearch(params);
+        return userRepository.selectBySearch(params);
     }
 
     /**
@@ -160,7 +160,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Integer addUser(User user) {
-        return userMapper.insertSelective(user);
+        return userRepository.insertSelective(user);
     }
 
     /**
@@ -174,10 +174,10 @@ public class UserServiceImpl implements UserService {
         if(user.getUserid() == 1) return -2;
         Map<String, Object> map = new HashMap<>();
         map.put("userid", user.getUserid());
-        if(borrowMapper.selectCountBySearch(map) > 0) {
+        if(borrowRepository.selectCountBySearch(map) > 0) {
             return -1;
         }
-        return userMapper.deleteByPrimaryKey(user.getUserid());
+        return userRepository.deleteByPrimaryKey(user.getUserid());
     }
 
     /**
@@ -203,7 +203,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Integer updateUser(User user) {
-        return userMapper.updateByPrimaryKeySelective(user);
+        return userRepository.updateByPrimaryKeySelective(user);
     }
 
 }

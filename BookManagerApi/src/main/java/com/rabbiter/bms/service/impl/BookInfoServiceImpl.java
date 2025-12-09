@@ -1,7 +1,7 @@
 package com.rabbiter.bms.service.impl;
 
-import com.rabbiter.bms.mapper.BookInfoMapper;
-import com.rabbiter.bms.mapper.BorrowMapper;
+import com.rabbiter.bms.repository.BookInfoRepository;
+import com.rabbiter.bms.repository.BorrowRepository;
 import com.rabbiter.bms.model.BookInfo;
 import com.rabbiter.bms.service.BookInfoService;
 import org.springframework.stereotype.Service;
@@ -19,10 +19,10 @@ import java.util.Map;
 public class BookInfoServiceImpl implements BookInfoService {
 
     @Resource
-    private BookInfoMapper bookInfoMapper;
+    private BookInfoRepository bookInfoRepository;
 
     @Resource
-    private BorrowMapper borrowMapper;
+    private BorrowRepository borrowRepository;
 
     /**
      * 获取总数
@@ -30,7 +30,7 @@ public class BookInfoServiceImpl implements BookInfoService {
      */
     @Override
     public Integer getCount() {
-        return bookInfoMapper.selectCount();
+        return bookInfoRepository.selectCount();
     }
 
     /**
@@ -39,7 +39,7 @@ public class BookInfoServiceImpl implements BookInfoService {
      */
     @Override
     public List<BookInfo> queryBookInfos() {
-        return bookInfoMapper.selectAll();
+        return bookInfoRepository.selectAll();
     }
 
     /**
@@ -49,7 +49,7 @@ public class BookInfoServiceImpl implements BookInfoService {
      */
     @Override
     public BookInfo queryBookInfoById(Integer bookid) {
-        return bookInfoMapper.selectByPrimaryKey(bookid);
+        return bookInfoRepository.selectByPrimaryKey(bookid);
     }
 
     /**
@@ -59,7 +59,7 @@ public class BookInfoServiceImpl implements BookInfoService {
      */
     @Override
     public Integer getSearchCount(Map<String, Object> params) {
-        return bookInfoMapper.selectCountBySearch(params);
+        return bookInfoRepository.selectCountBySearch(params);
     }
 
     /**
@@ -69,7 +69,7 @@ public class BookInfoServiceImpl implements BookInfoService {
      */
     @Override
     public List<BookInfo> searchBookInfosByPage(Map<String, Object> params) {
-        return bookInfoMapper.selectBySearch(params);
+        return bookInfoRepository.selectBySearch(params);
     }
 
     /**
@@ -79,7 +79,7 @@ public class BookInfoServiceImpl implements BookInfoService {
      */
     @Override
     public Integer addBookInfo(BookInfo bookInfo) {
-        return bookInfoMapper.insertSelective(bookInfo);
+        return bookInfoRepository.insertSelective(bookInfo);
     }
 
     /**
@@ -93,10 +93,10 @@ public class BookInfoServiceImpl implements BookInfoService {
         try{
             Map<String, Object> map = new HashMap<>();
             map.put("bookId", bookInfo.getBookid());
-            if(borrowMapper.selectCountBySearch(map) > 0) {
+            if(borrowRepository.selectCountBySearch(map) > 0) {
                 return -1;
             }
-            count = bookInfoMapper.deleteByPrimaryKey(bookInfo.getBookid());
+            count = bookInfoRepository.deleteByPrimaryKey(bookInfo.getBookid());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -124,7 +124,7 @@ public class BookInfoServiceImpl implements BookInfoService {
      */
     @Override
     public Integer updateBookInfo(BookInfo bookInfo) {
-        return bookInfoMapper.updateByPrimaryKeySelective(bookInfo);
+        return bookInfoRepository.updateByPrimaryKeySelective(bookInfo);
     }
 
 }

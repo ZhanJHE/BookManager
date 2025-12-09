@@ -1,6 +1,7 @@
-package com.rabbiter.bms.mapper;
+package com.rabbiter.bms.repository;
 
 import com.rabbiter.bms.model.Borrow;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -10,7 +11,8 @@ import java.util.Map;
 /**
  * 借阅Mapper
  */
-public interface BorrowMapper {
+@Mapper
+public interface BorrowRepository {
     /**
      * 根据主键删除
      * @param borrowid 借阅ID

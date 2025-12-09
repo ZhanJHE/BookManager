@@ -1,4 +1,4 @@
-package com.rabbiter.bms.web;
+package com.rabbiter.bms.Controller;
 
 import com.rabbiter.bms.exception.NotEnoughException;
 import com.rabbiter.bms.exception.OperationFailureException;

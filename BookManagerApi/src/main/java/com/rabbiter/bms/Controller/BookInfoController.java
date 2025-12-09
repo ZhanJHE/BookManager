@@ -1,4 +1,4 @@
-package com.rabbiter.bms.web;
+package com.rabbiter.bms.Controller;
 
 import com.rabbiter.bms.service.BookInfoService;
 import com.rabbiter.bms.utils.MyResult;

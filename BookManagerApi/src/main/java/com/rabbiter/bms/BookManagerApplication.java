@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan(value = "com.rabbiter.bms.mapper")
+@MapperScan(value = "com.rabbiter.bms.repository")
 public class BookManagerApplication {
 
     /**

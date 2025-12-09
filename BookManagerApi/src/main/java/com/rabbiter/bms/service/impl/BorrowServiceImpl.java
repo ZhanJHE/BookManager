@@ -1,6 +1,6 @@
 package com.rabbiter.bms.service.impl;
 
-import com.rabbiter.bms.mapper.BorrowMapper;
+import com.rabbiter.bms.repository.BorrowRepository;
 import com.rabbiter.bms.model.Borrow;
 import com.rabbiter.bms.service.BorrowService;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.Map;
 public class BorrowServiceImpl implements BorrowService {
 
     @Resource
-    private BorrowMapper borrowMapper;
+    private BorrowRepository borrowRepository;
 
     /**
      * 获取总数
@@ -27,7 +27,7 @@ public class BorrowServiceImpl implements BorrowService {
      */
     @Override
     public Integer getCount() {
-        return borrowMapper.selectCount();
+        return borrowRepository.selectCount();
     }
 
     /**
@@ -38,7 +38,7 @@ public class BorrowServiceImpl implements BorrowService {
      */
     @Override
     public Integer getSearchCount(Map<String, Object> params) {
-        return borrowMapper.selectCountBySearch(params);
+        return borrowRepository.selectCountBySearch(params);
     }
 
     /**
@@ -49,7 +49,7 @@ public class BorrowServiceImpl implements BorrowService {
      */
     @Override
     public List<Borrow> searchBorrowsByPage(Map<String, Object> params) {
-        List<Borrow> borrows = borrowMapper.selectBySearch(params);
+        List<Borrow> borrows = borrowRepository.selectBySearch(params);
         // 添加string类型的时间显示
         for(Borrow borrow : borrows) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -75,7 +75,7 @@ public class BorrowServiceImpl implements BorrowService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return borrowMapper.insertSelective(borrow);
+        return borrowRepository.insertSelective(borrow);
     }
 
     /**
@@ -86,7 +86,7 @@ public class BorrowServiceImpl implements BorrowService {
      */
     @Override
     public Integer addBorrow2(Borrow borrow) {
-        return borrowMapper.insertSelective(borrow);
+        return borrowRepository.insertSelective(borrow);
     }
 
     /**
@@ -98,9 +98,9 @@ public class BorrowServiceImpl implements BorrowService {
     @Override
     public Integer deleteBorrow(Borrow borrow) {
         // 先查询有没有还书
-        Borrow borrow1 = borrowMapper.selectByPrimaryKey(borrow.getBorrowid());
+        Borrow borrow1 = borrowRepository.selectByPrimaryKey(borrow.getBorrowid());
         if(borrow1.getReturntime() == null) return 0;
-        return borrowMapper.deleteByPrimaryKey(borrow.getBorrowid());
+        return borrowRepository.deleteByPrimaryKey(borrow.getBorrowid());
     }
 
     /**
@@ -134,7 +134,7 @@ public class BorrowServiceImpl implements BorrowService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return borrowMapper.updateByPrimaryKeySelective(borrow);
+        return borrowRepository.updateByPrimaryKeySelective(borrow);
     }
 
     /**
@@ -145,7 +145,7 @@ public class BorrowServiceImpl implements BorrowService {
      */
     @Override
     public Integer updateBorrow2(Borrow borrow) {
-        return borrowMapper.updateByPrimaryKeySelective(borrow);
+        return borrowRepository.updateByPrimaryKeySelective(borrow);
     }
 
     /**
@@ -156,7 +156,7 @@ public class BorrowServiceImpl implements BorrowService {
      */
     @Override
     public Borrow queryBorrowsById(Integer borrowid) {
-        return borrowMapper.selectByPrimaryKey(borrowid);
+        return borrowRepository.selectByPrimaryKey(borrowid);
     }
 
 }

@@ -1,6 +1,7 @@
-package com.rabbiter.bms.mapper;
+package com.rabbiter.bms.repository;
 
 import com.rabbiter.bms.model.BookType;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -10,7 +11,8 @@ import java.util.Map;
 /**
  * 图书类型Mapper
  */
-public interface BookTypeMapper {
+@Mapper
+public interface BookTypeRepository {
     /**
      * 根据主键删除
      * @param booktypeid 图书类型ID

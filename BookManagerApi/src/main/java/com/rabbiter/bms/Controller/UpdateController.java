@@ -1,4 +1,4 @@
-package com.rabbiter.bms.web;
+package com.rabbiter.bms.Controller;
 
 import com.rabbiter.bms.utils.PathUtils;
 import org.apache.tomcat.util.http.fileupload.FileItem;

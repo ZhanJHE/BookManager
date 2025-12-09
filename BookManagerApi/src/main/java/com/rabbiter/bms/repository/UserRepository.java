@@ -1,6 +1,7 @@
-package com.rabbiter.bms.mapper;
+package com.rabbiter.bms.repository;
 
 import com.rabbiter.bms.model.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -10,7 +11,8 @@ import java.util.Map;
 /**
  * 用户Mapper
  */
-public interface UserMapper {
+@Mapper
+public interface UserRepository {
     /**
      * 根据主键删除
      * @param userid 用户ID
