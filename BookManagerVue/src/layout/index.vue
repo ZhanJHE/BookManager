@@ -1,7 +1,5 @@
 <!--
- * @Description: 
- * @Author: Rabbiter
- * @Date: 2023-02-21 18:13:21
+
 -->
 <template>
   <div :class="classObj" class="app-wrapper">

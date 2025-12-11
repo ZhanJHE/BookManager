@@ -1,10 +1,4 @@
-## 迁移过程操作说明 
-- 将原本的项目结构改为MVC结构，将Controller、Service、Model、Repository三层结构。
-- 将XML配置方式改为现代的注解配置方式，将原本的XML配置文件改为Java配置类。
-- 更换低版本的依赖，使用高版本的依赖替代
-- 删除多余的接口，改为直接实现类
-  
-# 图书管理系统
+  # 图书管理系统
 
 这是一个基于 Spring Boot 和 Vue.js 的图书管理系统。
 
@@ -38,9 +32,7 @@
 2.  **运行后端应用程序:**
     *   导航到 `BookManagerApi` 目录。
     *   使用 Maven 运行应用程序：
-        ```bash
-        mvn spring-boot:run
-        ```
+    *   mvn spring-boot:run        ```
     *   后端服务将在 `http://localhost:9111` 上启动。
 
 ### 前端
@@ -82,3 +74,9 @@ BookManager/
 │   └── vue.config.js         # Vue CLI 配置文件
 └── README.md                 # 本文档
 ```
+
+## 迁移过程操作说明 
+- 将原本的项目结构改为MVC结构，将Controller、Service、Model、Repository三层结构。
+- 将XML配置方式改为现代的注解配置方式，将原本的XML配置文件改为Java配置类。
+- 更换低版本的依赖，使用高版本的依赖替代
+- 删除多余的接口，改为直接实现类

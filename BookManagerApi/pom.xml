@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <!--GAV坐标-->
-    <groupId>com.rabbiter.bms</groupId>
+    <groupId>com.zhanjhe.BookManager</groupId>
     <artifactId>BookManagerApi</artifactId>
     <version>1.0.5</version>
 
