@@ -2,8 +2,6 @@
 BookManagerVue/node_modules/
 BookManagerApi/target/
 BookManagerApi/.mvn/
-BookManagerApi/mvnw.cmd
-BookManagerApi/mvnw
 
 ### VScode ###
 .vscode/
