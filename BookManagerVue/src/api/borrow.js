@@ -1,6 +1,10 @@
+// 导入封装好的 axios 实例
 import request from '@/utils/request'
 
-// 获取借阅数量
+/**
+ * 获取借阅记录总数量
+ * @returns {Promise}
+ */
 export function getCount() {
     return request({
         url: '/borrow/getCount',
@@ -8,7 +12,10 @@ export function getCount() {
     })
 }
 
-// 查询所有借阅信息
+/**
+ * 查询所有借阅信息
+ * @returns {Promise}
+ */
 export function queryBorrows() {
     return request({
         url: '/borrow/queryBorrows',
@@ -16,7 +23,11 @@ export function queryBorrows() {
     })
 }
 
-// 分页查询借阅信息
+/**
+ * 分页查询借阅信息
+ * @param {object} params - 查询参数，例如 { page: 1, limit: 10, username: 'zhangsan' }
+ * @returns {Promise}
+ */
 export function queryBorrowsByPage(params) {
     return request({
         url: '/borrow/queryBorrowsByPage',
@@ -25,7 +36,11 @@ export function queryBorrowsByPage(params) {
     })
 }
 
-// 添加借阅信息
+/**
+ * 添加一条借阅记录
+ * @param {object} data - 借阅信息数据
+ * @returns {Promise}
+ */
 export function addBorrow(data) {
     return request({
         url: '/borrow/addBorrow',
@@ -34,7 +49,11 @@ export function addBorrow(data) {
     })
 }
 
-// 删除借阅信息
+/**
+ * 根据 ID 删除一条借阅记录
+ * @param {object} data - 包含借阅 ID 的对象，例如 { id: 1 }
+ * @returns {Promise}
+ */
 export function deleteBorrow(data) {
     return request({
         url: '/borrow/deleteBorrow',
@@ -43,7 +62,11 @@ export function deleteBorrow(data) {
     })
 }
 
-//  删除一些借阅信息
+/**
+ * 批量删除借阅记录
+ * @param {object} data - 包含借阅 ID 列表的对象，例如 { ids: [1, 2, 3] }
+ * @returns {Promise}
+ */
 export function deleteBorrows(data) {
     return request({
         url: '/borrow/deleteBorrows',
@@ -52,7 +75,11 @@ export function deleteBorrows(data) {
     })
 }
 
-//  更新借阅信息
+/**
+ * 更新借阅信息
+ * @param {object} data - 需要更新的借阅信息数据
+ * @returns {Promise}
+ */
 export function updateBorrow(data) {
     return request({
         url: '/borrow/updateBorrow',
@@ -61,7 +88,12 @@ export function updateBorrow(data) {
     })
 }
 
-// 借书
+/**
+ * 用户借书
+ * @param {number} userid - 用户 ID
+ * @param {number} bookid - 图书 ID
+ * @returns {Promise}
+ */
 export function borrowBook(userid, bookid) {
     return request({
         url: '/borrow/borrowBook',
@@ -73,7 +105,12 @@ export function borrowBook(userid, bookid) {
     })
 }
 
-// 还书
+/**
+ * 用户还书
+ * @param {number} borrowid - 借阅记录 ID
+ * @param {number} bookid - 图书 ID
+ * @returns {Promise}
+ */
 export function returnBook(borrowid, bookid) {
     return request({
         url: '/borrow/returnBook',

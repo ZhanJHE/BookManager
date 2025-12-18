@@ -1,6 +1,10 @@
+// 导入封装好的 axios 实例
 import request from '@/utils/request'
 
-// 获取图书数量
+/**
+ * 获取图书总数量
+ * @returns {Promise} - 返回一个 Promise 对象
+ */
 export function getCount() {
     return request({
         url: '/bookInfo/getCount',
@@ -8,7 +12,10 @@ export function getCount() {
     })
 }
 
-// 查询所有图书信息
+/**
+ * 查询所有图书信息
+ * @returns {Promise}
+ */
 export function queryBookInfos() {
     return request({
         url: '/bookInfo/queryBookInfos',
@@ -16,7 +23,11 @@ export function queryBookInfos() {
     })
 }
 
-// 分页查询图书信息
+/**
+ * 分页查询图书信息
+ * @param {object} params - 查询参数，例如 { page: 1, limit: 10, name: '三体' }
+ * @returns {Promise}
+ */
 export function queryBookInfosByPage(params) {
     return request({
         url: '/bookInfo/queryBookInfosByPage',
@@ -25,7 +36,11 @@ export function queryBookInfosByPage(params) {
     })
 }
 
-// 添加图书信息
+/**
+ * 添加一本图书
+ * @param {object} data - 图书信息数据
+ * @returns {Promise}
+ */
 export function addBookInfo(data) {
     return request({
         url: '/bookInfo/addBookInfo',
@@ -34,7 +49,11 @@ export function addBookInfo(data) {
     })
 }
 
-// 删除图书信息
+/**
+ * 根据 ID 删除一本图书
+ * @param {object} data - 包含图书 ID 的对象，例如 { id: 1 }
+ * @returns {Promise}
+ */
 export function deleteBookInfo(data) {
     return request({
         url: '/bookInfo/deleteBookInfo',
@@ -43,7 +62,11 @@ export function deleteBookInfo(data) {
     })
 }
 
-//  删除一些图书信息
+/**
+ * 批量删除图书
+ * @param {object} data - 包含图书 ID 列表的对象，例如 { ids: [1, 2, 3] }
+ * @returns {Promise}
+ */
 export function deleteBookInfos(data) {
     return request({
         url: '/bookInfo/deleteBookInfos',
@@ -52,7 +75,11 @@ export function deleteBookInfos(data) {
     })
 }
 
-//  更新图书信息
+/**
+ * 更新图书信息
+ * @param {object} data - 需要更新的图书信息数据
+ * @returns {Promise}
+ */
 export function updateBookInfo(data) {
     return request({
         url: '/bookInfo/updateBookInfo',

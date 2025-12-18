@@ -1,5 +1,7 @@
 <template>
+    <!-- 根容器，用于整个注册页面 -->
     <div class="login-container">
+        <!-- Element UI 的表单组件，用于收集用户注册信息 -->
         <el-form
             ref="loginForm"
             :model="loginForm"
@@ -8,11 +10,12 @@
             auto-complete="on"
             label-position="left"
         >
-            <!-- 标题 -->
+            <!-- 标题容器 -->
             <div class="title-container">
                 <h3 class="title">注册新账号</h3>
             </div>
-            <!-- 用户名 -->
+
+            <!-- 用户名输入框 -->
             <el-form-item prop="username">
                 <span class="svg-container">
                     <i class="el-icon-a-052"></i>
@@ -27,7 +30,8 @@
                     auto-complete="on"
                 />
             </el-form-item>
-            <!-- 密码 -->
+
+            <!-- 密码输入框 -->
             <el-form-item prop="password">
                 <span class="svg-container">
                     <i class="el-icon-a-051"></i>
@@ -42,7 +46,8 @@
                     auto-complete="on"
                 />
             </el-form-item>
-            <!-- 确认密码 -->
+
+            <!-- 确认密码输入框 -->
             <el-form-item prop="repeat">
                 <span class="svg-container">
                     <i class="el-icon-a-051"></i>
@@ -59,7 +64,7 @@
                 />
             </el-form-item>
 
-            <!-- 登录按钮 -->
+            <!-- 按钮容器，包含确认和返回登录按钮 -->
             <div style="height: 40px; margin-bottom: 30px">
                 <el-button
                     :loading="loading"
@@ -81,11 +86,13 @@
 </template>
 
 <script>
+// 导入注册 API 请求函数
 import { register } from "@/api/user";
 
 export default {
     name: "Login",
     data() {
+        // 自定义验证规则，用于检查两次输入的密码是否一致
         const validateRepeat = (rule, value, callback) => {
             if (value !== this.loginForm.password) {
                 callback(new Error("两次输入的密码不一致!"));
@@ -94,11 +101,13 @@ export default {
             }
         };
         return {
+            // 表单数据模型
             loginForm: {
                 username: "",
                 password: "",
                 repeat: "",
             },
+            // 表单验证规则
             loginRules: {
                 username: [
                     {
@@ -116,16 +125,21 @@ export default {
                         message: "请再次输入密码",
                         trigger: "blur",
                     },
+                    // 使用自定义验证器
                     { trigger: "blur", validator: validateRepeat },
                 ],
             },
+            // 控制按钮加载状态
             loading: false,
         };
     },
     methods: {
+        // 处理注册逻辑
         handleRight() {
+            // 触发表单验证
             this.$refs.loginForm.validate((valid) => {
                 if (valid) {
+                    // 调用注册 API
                     register({
                         username: this.loginForm.username,
                         password: this.loginForm.password,
@@ -142,6 +156,7 @@ export default {
                 }
             });
         },
+        // 处理返回登录页面的逻辑
         handleBack() {
             this.$router.push("/login");
         },
@@ -150,20 +165,19 @@ export default {
 </script>
 
 <style lang="scss">
-/* 修复input 背景不协调 和光标变色 */
-/* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
-
+// 全局样式，用于覆盖 Element UI 的默认样式
 $bg: #283443;
 $light_gray: #fff;
 $cursor: #fff;
 
+// 修复在某些浏览器中 input 背景和光标颜色的问题
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
     .login-container .el-input input {
         color: $cursor;
     }
 }
 
-/* reset element-ui css */
+// 重置 Element UI 的部分样式
 .login-container {
     .el-input {
         display: inline-block;
@@ -180,6 +194,7 @@ $cursor: #fff;
             height: 47px;
             caret-color: $cursor;
 
+            // 修复浏览器自动填充时 input 背景色的问题
             &:-webkit-autofill {
                 box-shadow: 0 0 0px 1000px $bg inset !important;
                 -webkit-text-fill-color: $cursor !important;
@@ -193,6 +208,7 @@ $cursor: #fff;
         border-radius: 5px;
         color: #454545;
     }
+    // 隐藏 Element UI select 组件的向上箭头
     .el-icon-arrow-up:before {
         content: "";
     }
@@ -200,6 +216,7 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
+// 组件作用域内的样式
 $bg: #2d3a4b;
 $dark_gray: #889aa4;
 $light_gray: #eee;
